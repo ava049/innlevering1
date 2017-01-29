@@ -1,0 +1,180 @@
+package innlevering_1;
+//import java.util.*;
+public class oppg97{
+	
+	public static void main(String[] args){
+	    Account konto1 = new Account();
+	    Account konto2 = new Account("bob frank", 212121, 10000);
+	    
+	    konto1.setId(666);
+	    konto1.setAnnualInterestRate(12.5);
+	    konto1.setBalance(1337);
+	    
+	    System.out.println("id: " + konto1.getId());
+	    System.out.println("balance: " + konto1.getBalance());
+	    System.out.println("annualInterestRate: " + konto1.getAnnualInterestRate());
+	    System.out.println("dateCreated: " + konto1.getDateCreated());
+	    System.out.println("monthlyinterestrate: " + konto1.getMonthlyInterestRate());
+	    
+	    System.out.println("id: " + konto2.getId());
+	    System.out.println("balance: " + konto2.getBalance());
+	    System.out.println("annualInterestRate: " + konto2.getAnnualInterestRate());
+	    System.out.println("dateCreated: " + konto2.getDateCreated());
+	    System.out.println("monthlyinterestrate: " + konto2.getMonthlyInterest());
+	    konto2.setAnnualInterestRate(14);
+	    konto2.setBalance(100000);
+	    System.out.println("balance: " + konto2.getBalance());
+	    konto2.Deposit(12, "lønn");
+	    konto2.Deposit(12, "stipend");
+	    konto2.Withdraw(9005, "bensin");
+	    konto2.Withdraw(3200, "mat");
+	    konto2.getTransactions();
+	  }
+}
+
+
+package innlevering_1;
+import java.util.*;
+
+public class Account {
+	  private int id = 0;
+	  private double balance = 0;
+	  private double annualInterestRate = 0;
+	  private Date dateCreated = new Date();
+	  private String name;
+	  private ArrayList<Transaction> transactiontab = new ArrayList<>();
+	  
+	  Account(){
+	  }
+
+	 // Account(int id, double balance){
+	 //   this.id = id;
+	 //   this.balance = balance;
+	 // }
+
+	  Account(String name, int id, double balance){
+		  this.name = name;
+		  this.id = id;
+		  this.balance = balance;
+		  transactiontab.add(new Transaction('D', 0, balance, "ny konto")); 
+	  }
+	  
+	  public int getId(){
+		  return id;
+	  }
+
+	  public double getBalance(){
+	    return balance;
+	  } 
+
+	  public double getAnnualInterestRate(){
+	    return annualInterestRate;
+	  }
+
+	  public Date getDateCreated(){
+	    return dateCreated;
+	  }
+
+	  public double getMonthlyInterestRate(){
+	    return annualInterestRate/12;
+	  }
+	  
+	  public double getMonthlyInterest(){
+	    return ((annualInterestRate/12)*balance)/100;
+	  }
+	  
+	  public String getName(){
+		  return name;
+	  }
+	  
+	  public void getTransactions(){
+		  int lengdearray = transactiontab.size();
+		  for(int i = 0; i < lengdearray; i++ ){
+			  System.out.println(transactiontab.get(i).getType() + " " + transactiontab.get(i).getAmount() + " " + transactiontab.get(i).getBalance() + " " + transactiontab.get(i).getDescription() + " " + transactiontab.get(i).getDate());
+		  }
+	  }
+
+	  public void setId(int id){
+	    this.id = id;
+	  }
+
+	  public void setBalance(double balance){
+	    this.balance = balance;
+	  }
+
+	  public void setAnnualInterestRate(double annualInterestRate){
+	    this.annualInterestRate = annualInterestRate;
+	  }
+
+	  public double Withdraw(double amount, String description){
+	    balance = balance - amount;
+	    transactiontab.add(new Transaction('W', amount, balance, description)); 
+	    return balance;
+	  }
+
+	  public double Deposit(double amount, String description){
+	    balance = balance + amount;
+	    transactiontab.add(new Transaction('D', amount, balance, description)); 
+	    return amount;
+	  }
+
+	  public String setName(String name){
+		  return name;
+	  }
+
+}
+
+
+package innlevering_1;
+import java.util.*;
+
+public class Transaction {
+	private Date date = new Date();
+	private char type = 'x';
+	private double amount = 0;
+	private double balance = 0;
+	String description = "xxxx";
+	
+	Transaction(char type, double amount, double balance, String description){
+		this.type = type;
+		this.amount = amount;
+		this.balance = balance;
+		this.description = description;
+	}
+	
+	public char getType(){
+		return type;
+	}
+	
+	public double getAmount(){
+		return amount;
+	}
+	
+	public double getBalance(){
+		return balance;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public Date getDate(){
+		return date;
+	}
+
+	public void setType(char type){
+		this.type = type;
+	}
+	
+	public void setAmount(double amount){
+		this.amount = amount;
+	}
+	
+	public void setBalance(double balance){
+		this.balance = balance;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
+	}
+}
