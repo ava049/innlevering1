@@ -1,0 +1,48 @@
+package innlevering_1;
+
+public class Bud{
+
+  private GregorianCalendar budGitt;
+  private GregorianCalendar budFrist;
+  private float belop;
+  private String navn;
+  private String telefon;
+
+  Bud(String navn, float belop, String telefon, int frist){
+    this.navn = navn;
+    this.belop = belop;
+    this.telefon = telefon;
+    budFrist.add(GregorianCalendar.HOUR, frist);
+  }
+}
+
+package innlevering_1;
+
+public class Eiendom{
+  private String adresse;
+  private String eiersNavn;
+  private double takst;
+  private int antKvm;
+  private int gnr;
+  private int bnr;
+  arrayList<Bud> budOversikt = new arrayList<>();
+
+  Eiendom(String adresse, String eiersNavn, double takst, int antKvm, int gnr, int bnr){
+    this.adresse = adresse;
+    this.eiersNavn = eiersNavn;
+    this.takst = takst;
+    this.antKvm = antKvm;
+    this.gnr = gnr;
+    this.bnr = bnr;
+  }
+
+  public void nyttBud(String navn, float belop, String tel, int frist){
+    budOversikt.add() = new Bud(navn, belop, tel, frist)
+  }
+  
+  public String getSisteBud(){
+    lengdeBudOversikt = budOversikt.size();
+    return (String)budOversikt.get(lengdeBudOversikt-1);
+  }
+  skrivAlleBud
+} 
