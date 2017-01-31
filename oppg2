@@ -1,5 +1,67 @@
 package innlevering_1;
 
+public class Enebolig {
+	 private final int FRITTSTAAENDE = 1;
+	 private final int REKKE = 2;
+	 private final int  TOMANNS = 3;
+	 private int type;
+	 
+	 Enebolig(){
+		 
+	 }
+	 
+	 public String getTypeAsString(){
+		 return"";
+	 }
+	 public void skrivAlleBud(){
+		 
+	 }
+}
+
+
+package innlevering_1;
+
+
+import java.util.*;
+public class Eiendom{
+	  private String adresse;
+	  private String eiersNavn;
+	  private double takst;
+	  private int antKvm;
+	  private int gnr;
+	  private int bnr;
+	  ArrayList<Bud> budOversikt = new ArrayList<>();
+
+	  Eiendom(String adresse, String eiersNavn, double takst, int antKvm, int gnr, int bnr){
+	    this.adresse = adresse;
+	    this.eiersNavn = eiersNavn;
+	    this.takst = takst;
+	    this.antKvm = antKvm;
+	    this.gnr = gnr;
+	    this.bnr = bnr;
+	  }
+
+	  public void nyttBud(String navn, float belop, String tel, int frist){
+	    budOversikt.add(new Bud(navn, belop, tel, frist));
+	  }
+
+	  public String getSisteBud(){
+	    int lengdeBudOversikt = budOversikt.size();
+	    return budOversikt.get(lengdeBudOversikt-1).getBudGitt() + " " + budOversikt.get(lengdeBudOversikt-1).getBudFrist() + " " + budOversikt.get(lengdeBudOversikt-1).getBelop() + " " + budOversikt.get(lengdeBudOversikt-1).getNavn() + " " + budOversikt.get(lengdeBudOversikt-1).getTelefon();
+	  }
+	  public void skrivAlleBud(){
+		  int antBud = budOversikt.size();
+		  for(int i = 0; i < antBud; i++){
+			  System.out.println(budOversikt.get(i).getBudGitt()+ " " + budOversikt.get(i).getBudFrist() + " " + budOversikt.get(i).getBelop() + " " + budOversikt.get(i).getNavn() + " " + budOversikt.get(i).getTelefon());
+		  }
+	  }
+	} 
+
+package innlevering_1;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Bud{
 
   private GregorianCalendar budGitt;
@@ -12,37 +74,46 @@ public class Bud{
     this.navn = navn;
     this.belop = belop;
     this.telefon = telefon;
-    budFrist.add(GregorianCalendar.HOUR, frist);
+    budGitt = new GregorianCalendar();
+    budFrist = new GregorianCalendar();
+    budFrist.add(GregorianCalendar.HOUR_OF_DAY, frist);
+  }
+
+  public Date getBudGitt(){
+    return budGitt.getTime();
+  }
+
+  public Date getBudFrist(){
+    return budFrist.getTime();
+  }
+
+  public float getBelop(){
+    return belop;
+  }
+
+  public String getNavn(){
+    return navn;
+  }
+
+  public String getTelefon(){
+    return telefon;
   }
 }
 
 package innlevering_1;
 
-public class Eiendom{
-  private String adresse;
-  private String eiersNavn;
-  private double takst;
-  private int antKvm;
-  private int gnr;
-  private int bnr;
-  arrayList<Bud> budOversikt = new arrayList<>();
-
-  Eiendom(String adresse, String eiersNavn, double takst, int antKvm, int gnr, int bnr){
-    this.adresse = adresse;
-    this.eiersNavn = eiersNavn;
-    this.takst = takst;
-    this.antKvm = antKvm;
-    this.gnr = gnr;
-    this.bnr = bnr;
-  }
-
-  public void nyttBud(String navn, float belop, String tel, int frist){
-    budOversikt.add() = new Bud(navn, belop, tel, frist)
-  }
-  
-  public String getSisteBud(){
-    lengdeBudOversikt = budOversikt.size();
-    return (String)budOversikt.get(lengdeBudOversikt-1);
-  }
-  skrivAlleBud
-} 
+public class Oppg2 {
+	public static void main(String[] args){
+		Eiendom eiendom1 = new Eiendom("Trump tower 1", "Andreas the great", 1000, 10, 20, 30);
+	
+	eiendom1.nyttBud("bjarte", 15000000, "555000", 4);
+	eiendom1.nyttBud("kjell", 18000000, "555000", 4);
+	eiendom1.nyttBud("tone", 25000000, "555000", 4);
+	
+	System.out.println(eiendom1.getSisteBud());
+	eiendom1.skrivAlleBud();
+	
+	}
+	
+	
+}
