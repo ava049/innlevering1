@@ -3,14 +3,30 @@ import java.io.File;
 import java.util.*;
 public class Oppg4 {
 	public static void main(String[] args) throws Exception{
+
 		File filen = new File(args[0]);;
-		System.out.println(filen.exists());
-		System.out.println(filen.length());
-	
+
+		ArrayList<String> linjeneIFilen = new ArrayList<>();
 		Scanner input = new Scanner(filen);
 		while(input.hasNext()){
-			
+			linjeneIFilen.add(input.nextLine());
 		}
 		
+		int antOrd = 0;
+		int antLinjer = linjeneIFilen.size();
+		for(int i = 0; i < antLinjer; i++){
+			antOrd = antOrd + getNumberOfWordsInString(linjeneIFilen.get(i));
+		}
+		
+		System.out.println("Ant linjer: " + antLinjer);
+		System.out.println("Ant ord: " + antOrd);
+		System.out.println("Ant tegn: " + filen.length());
+		
+	}
+	
+	public static int getNumberOfWordsInString(String s){
+		String words[] = s.split(" ");
+		int ant = words.length;
+		return ant;
 	}
 }
